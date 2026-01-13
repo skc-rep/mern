@@ -1,8 +1,8 @@
 import React from 'react'
 import {createBrowserRouter, RouterProvider} from "react-router-dom"
 import Home from './components/Home'
-import Studentrecords from './pages/Studentrecords'
-import Addbar from './pages/Addbar'
+import Studentrecords from './components/Studentrecords'
+import Addbar from './components/Add'
 
 const App = () => {
 

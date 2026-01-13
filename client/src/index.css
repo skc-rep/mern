@@ -13,3 +13,7 @@ a.active div{
   color:#22D3EE;
   background-color: rgb(30, 29, 29);
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
