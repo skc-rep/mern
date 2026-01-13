@@ -52,7 +52,7 @@ export const updatestd = async (req, res) => {
 
     const stdUpdate = await std.findByIdAndUpdate(id, body, { new: true });
 
-    return res.status(200).send({message : "Updated SuccessFully !!!"});
+    return res.status(200).send({message : "Updated SuccessFully in the record !!!"});
   } catch (error) {
     console.log(error);
   }
