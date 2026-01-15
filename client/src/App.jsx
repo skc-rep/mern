@@ -3,6 +3,7 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom"
 import Home from './components/Home'
 import Studentrecords from './components/Studentrecords'
 import Addbar from './components/Add'
+import Update from './components/Update'
 
 const App = () => {
 
@@ -18,6 +19,10 @@ const App = () => {
     {
       path:"/addrecords",
       element:<Addbar />
+    },
+    {
+      path:"/upt/:id",
+      element:<Update />
     },
   ])
 

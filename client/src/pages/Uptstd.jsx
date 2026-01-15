@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 const Addstd = () => {
@@ -10,7 +10,21 @@ const Addstd = () => {
     phnumber: "",
   };
   const [recs, setrecs] = useState(rec);
+  const { id } = useParams();
 
+  useEffect(() => {
+    const func = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:4000/api/students/${id}`
+        );
+        setrecs(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    func();
+  }, [id]);
   const navigate = useNavigate();
 
   const inputHandler = (e) => {
@@ -18,12 +32,13 @@ const Addstd = () => {
     setrecs({ ...recs, [name]: value });
   };
 
+
   const submitHandler = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        "http://localhost:4000/api/addstd",
+      const response = await axios.put(
+        `http://localhost:4000/api/updatestd/${id}`,
         recs
       );
       toast.success(response.data.message, { position: "top-right" });
@@ -54,6 +69,7 @@ const Addstd = () => {
                 placeholder="Enter Student's Name"
                 name="name"
                 id="name"
+                value={recs.name}
               />
             </div>
             <div className="flex justify-center items-start flex-col w-[90%]">
@@ -67,6 +83,7 @@ const Addstd = () => {
                 placeholder="Enter Student's Address"
                 name="address"
                 id="address"
+                value={recs.address}
               />
             </div>
             <div className="flex justify-center items-start flex-col w-[90%]">
@@ -80,6 +97,7 @@ const Addstd = () => {
                 placeholder="Enter Student's PhNumber"
                 name="phnumber"
                 id="phnumber"
+                value={recs.phnumber}
               />
             </div>
           </div>
@@ -95,7 +113,7 @@ const Addstd = () => {
             transition-all duration-300  cursor-pointer w-[30%]
 "
             >
-              Add
+              Update
             </button>
           </div>
         </form>
