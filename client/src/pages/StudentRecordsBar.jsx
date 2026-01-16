@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { NotebookPen, Trash2 } from "lucide-react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import {toast} from "react-hot-toast";
 
 const StudentRecordsBar = () => {
   const [students, setstudents] = useState([]);
@@ -24,7 +25,7 @@ const StudentRecordsBar = () => {
         `http://localhost:4000/api/deletestd/${id}`
       );
       setstudents((prev) => prev.filter((std) => std._id !== id));
-      toast.success(response.data.message, { position: "top-right" });
+      toast.error(response.data.message, { position: "top-right" });
     } catch (error) {
       console.log(error);
     }
